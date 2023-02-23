@@ -3,7 +3,7 @@ import { isDefined, oneline } from './utils';
 import defaultOptions from './default-options';
 
 export function onRenderBody({ setPostBodyComponents }, pluginOptions) {
-    const { productionOnly, respectDNT, trackingCode } = Object.assign(
+    const { productionOnly, respectDNT, trackingCode, businessUnitId } = Object.assign(
         {},
         defaultOptions,
         pluginOptions
@@ -23,7 +23,7 @@ export function onRenderBody({ setPostBodyComponents }, pluginOptions) {
             key={`gatsby-plugin-hubspot`}
             async
             defer
-            src={`//js.hs-scripts.com/${trackingCode}.js`}
+            src={`//js.hs-scripts.com/${trackingCode}.js${businessUnitId ? `?businessUnitId=${businessUnitId}` : ''}`}
             dangerouslySetInnerHTML={{
                 __html: oneline`
                     var _hsq = window._hsq = window._hsq || [];
